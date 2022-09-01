@@ -4,7 +4,7 @@ from django.db import models
 
 class Book(models.Model):
     id = models.AutoField
-    title = models.CharField(max_length=128, verbose_name='Titulo') # verbose_name = label on form
+    title = models.CharField(max_length=128, verbose_name='Titulo') # verbose_name = field.label on form
     image = models.ImageField(upload_to='images/', null=True, verbose_name='Imagen')
     description = models.TextField(null=True, verbose_name='Descripcion')
 

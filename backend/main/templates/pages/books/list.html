@@ -4,7 +4,7 @@
 
 {% block container %}
 
- <div class="card">
+<div class="card">
     <div class="card-header">
         <h4>Lista de libros</h4>
     </div>
@@ -22,27 +22,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for book in books %} <!-- books import from views.py { 'books': books } -->
+                    {% for book in books %}
+                    <!-- books import from views.py { 'books': books } -->
                     <tr class="">
                         <td>{{ book.id }}</td>
                         <td>{{ book.title }}</td>
                         <td><img src="{{ book.image.url }}" alt="{{ book.title }}" width="70" height="100"></td>
                         <td>{{ book.description }}</td>
                         <td>
-                            <a class="btn btn-info btn-sm text-white" href="{% url 'update' book.id %}" role="button">Modificar</a> | 
+                            <a class="btn btn-info btn-sm text-white" href="{% url 'update' book.id %}"
+                                role="button">Modificar</a> |
                             {% comment %} send id in 'href' {% endcomment %}
-                            <a class="btn btn-danger btn-sm text-white" href="{% url 'delete' book.id %}" role="button">Eliminar</a>
+                            <a class="btn btn-danger btn-sm text-white" href="{% url 'delete' book.id %}"
+                                role="button">Eliminar</a>
                         </td>
-                    </tr> 
-                    {% endfor %}                   
+                    </tr>
+
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center text-warning">
+                            <h1>No hay tareas</h1>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
-        
+
     </div>
     <div class="card-footer text-muted">
         {{ books.count }} libros
     </div>
- </div>
+</div>
 
 {% endblock %}

@@ -1,3 +1,4 @@
+from turtle import title
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Book
@@ -14,15 +15,24 @@ def books(req):
     return render(req, 'pages/books/list.html', {'books': books}) # search on folder 'templates' automatic  
 
 def insert(req):
+    print('==> insert()')
+    print('==> req.POST', req.POST)
+    print('==> req.FILES', req.FILES)
     bookForm = BookForm(req.POST or None, req.FILES or None) # <== create form type post
     #print(bookForm) # <== comprobate (html code)
-    #print('isValid: ', bookForm.is_valid()) # comprobate
+    print('==> isValid: ', bookForm.is_valid()) # comprobate
     if bookForm.is_valid():
         bookForm.save()
         return redirect('books') # urls.py -> path(..., name='books')
+
+    # option 2
+    # book = Book(title=req.POST['title'], description=req.POST['description'])
+    # book.save()
+
     return render(req, 'pages/books/insert.html', { 'bookForm': bookForm }) # send form on object
 
 def update(req, id):
+    print('==> update()')
     book = Book.objects.get(id=id)
     #print(book) # comprobation
     bookForm = BookForm(req.POST or None, req.FILES or None, instance=book)

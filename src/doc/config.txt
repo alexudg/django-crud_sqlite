@@ -388,8 +388,10 @@ verify runing server
         return render(req, 'pages/books/insert.html', { 'bookForm': bookForm }) # send form on object
     
     # edit main\templates\books\form.py
+    
       <form enctype="multipart/form-data" method="post">
-        <!-- id for django -->
+        
+        <!-- input hidden secret from django -->
         {% csrf_token %}
         
         {% for field in bookForm %}
