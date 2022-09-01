@@ -1,0 +1,38 @@
+<div class="container">
+    <form enctype="multipart/form-data" method="post">
+        <!-- id for django -->
+        {% csrf_token %}
+        
+        
+        {% for field in bookForm %}
+        
+        <!-- fields on table from bookForm -->
+        <div class="mb-3">
+            <label for="title" class="form-label">{{ field.label }}</label>
+
+            {% if field.field.widget.input_type == 'file' and field.value %}
+                <img 
+                    src="{{ MEDIA_URL }}/images/{{ field.value }}" 
+                    alt="{{ field.label }}" 
+                    width="35" 
+                    height="50" 
+                    class="mb-3" />
+            {% endif %}
+
+            <input 
+                type="{{ field.field.widget.input_type }}" 
+                class="form-control" 
+                name="{{ field.name }}"
+                id=""
+                placeholder="{{ field.label }}" 
+                value="{{ field.value | default:'' }}"                
+            />
+            <!-- id: asigned automatic -->
+        </div>
+        <small class="col-12 form-text text-danger">{{ field.errors }}</small>
+        {% endfor %}
+        <!-- <input class="btn btn-primary" type="button" value="Guardar"> -->
+        <input type="submit" class="btn btn-primary" value="Guardar">
+        <a class="btn btn-secondary" href="{% url 'books' %}" role="button">Cancelar</a>
+    </form>
+</div>

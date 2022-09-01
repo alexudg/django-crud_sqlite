@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %} Lista de libros {% endblock %}
+
+{% block container %}
+
+ <div class="card">
+    <div class="card-header">
+        <h4>Lista de libros</h4>
+    </div>
+    <div class="card-body">
+        <a class="btn btn-success" href="{% url 'insert' %}" role="button">Agregar</a>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %} <!-- books import from views.py { 'books': books } -->
+                    <tr class="">
+                        <td>{{ book.id }}</td>
+                        <td>{{ book.title }}</td>
+                        <td><img src="{{ book.image.url }}" alt="{{ book.title }}" width="70" height="100"></td>
+                        <td>{{ book.description }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm text-white" href="{% url 'update' book.id %}" role="button">Modificar</a> | 
+                            {% comment %} send id in 'href' {% endcomment %}
+                            <a class="btn btn-danger btn-sm text-white" href="{% url 'delete' book.id %}" role="button">Eliminar</a>
+                        </td>
+                    </tr> 
+                    {% endfor %}                   
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+    <div class="card-footer text-muted">
+        {{ books.count }} libros
+    </div>
+ </div>
+
+{% endblock %}
