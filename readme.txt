@@ -1,4 +1,4 @@
-##### Prerequisites:
+﻿##### Prerequisites:
   * windows 7 x64 sp1
 
   * python 3 & pip, comprobation:
@@ -272,7 +272,7 @@ verify runing server
       +--image varchar(100)
       +--description text
 
-##### config admin editing file '<project>\main\admin.py'
+##### config admin for create interfaz for editing table on file '<project>\main\admin.py'
   from django.contrib import admin
   from .models import Book
 
